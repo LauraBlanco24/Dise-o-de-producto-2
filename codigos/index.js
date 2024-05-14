@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
 
 const pastilleroSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     cantidad_pastillas: Number,
     bateria: Number,
     fecha: Date,
@@ -38,7 +38,7 @@ const pastilleroSchema = new mongoose.Schema({
 
 const pastillaSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     tipoPastilla: String,
     peso: String,
     dimensiones: String,
@@ -47,29 +47,29 @@ const pastillaSchema = new mongoose.Schema({
 
 const horarioMedicacionSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     fhoraToma: Number,
     frecuenciaDiaria: Object //el objeto esta por hora y dia 
 })
 
 const recordatoriosSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     fhoraToma: Number,
     mensaje: String
 })
 
 const registroTomaSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    idPastilla: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastilla' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
+    idPastilla: { type: mongoose.Schema.Types.ObjectId },
     fhRegistro: Number,
     estado: Boolean
 })
 
 const notificacionesSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     fhNotificacion: Number,
     tipoNotificacion: String,
     textoNotificacion: String
@@ -77,15 +77,15 @@ const notificacionesSchema = new mongoose.Schema({
 
 const inventarioSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    idPastilla: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastilla' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
+    idPastilla: { type: mongoose.Schema.Types.ObjectId },
     cantidadPastilla: Number,
     fechaReposicion: Date,
 })
 
 const datosSaludSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     alergias: [String], //se guardan las alergias en un array
     condicionesMedicas: [String],
     medicamentoActuales: [String] //Nombre de los medicamentos en un array
@@ -93,7 +93,7 @@ const datosSaludSchema = new mongoose.Schema({
 
 const historialMedicoSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId},
     enfermedades: [String], //se guardan las enfermedades en un array
     procesoMedicos: [String],
     medicamentos: [String] //Nombre de los medicamentos en un array
@@ -101,7 +101,7 @@ const historialMedicoSchema = new mongoose.Schema({
 
 const contactoEmergenciaSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     nombre: String, 
     apellidos: String,
     numero: Number,
@@ -110,28 +110,28 @@ const contactoEmergenciaSchema = new mongoose.Schema({
 
 const sincronizacionSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     ultimaSincronizacion: Date
 })
 
 const estadisticasSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     ahderencia: Object,
     tendenciaAhderencia: Object
 })
 
 const dosificacionSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId},
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     dosis: Object
 })
 
 const MedicoSchema = new mongoose.Schema({
     _id: String,
-    idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    idUsuario: { type: mongoose.Schema.Types.ObjectId },
     nombre: String,
     epecialidad: String,
     direcccion: String
@@ -139,7 +139,7 @@ const MedicoSchema = new mongoose.Schema({
 
 const farmaciaSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     nombre: String,
     numero: Number,
     diasAtencion: String,
@@ -148,14 +148,14 @@ const farmaciaSchema = new mongoose.Schema({
 
 const ubicacionSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     fechaHora: Number,
     ubicacion: Object
 })
 
 const preferenciasSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     descripcion: String,
     fechaLanzamiento: Date,
     estado: Boolean
@@ -163,10 +163,9 @@ const preferenciasSchema = new mongoose.Schema({
 
 const actulizacionesSchema = new mongoose.Schema({
     _id: String,
-    idPastillero: { type: mongoose.Schema.Types.ObjectId, ref: 'Pastillero' },
+    idPastillero: { type: mongoose.Schema.Types.ObjectId },
     idioma: String,
-    formatoFecha: String,
-    formatoHora: String
+    formatoFecha: Date, 
 })
 
 const paisSchema = new mongoose.Schema({
@@ -177,7 +176,7 @@ const paisSchema = new mongoose.Schema({
 
 const ciudadSchema = new mongoose.Schema({
     _id: String,
-    idCiudad: { type: mongoose.Schema.Types.ObjectId, ref: 'Pais' },
+    idCiudad: { type: mongoose.Schema.Types.ObjectId },
     nombreCiudad: String,
     codigo: String
 })
@@ -203,6 +202,16 @@ const preferenciasModel = mongoose.model('Preferencia', preferenciasSchema)
 const actulizacionesModel = mongoose.model('Actulizaciones', actulizacionesSchema)
 const paisModel = mongoose.model('Pais', paisSchema)
 const ciudadSModel = mongoose.model('Ciudad', ciudadSchema)
+
+
+const rutasProtegidas = express.Router()
+
+rutasProtegidas.use((req, res, next)=>{
+    const token = req.headers["access-token"]
+    if(token){
+        jwt.verify(token, app.get("llave"))
+    }
+})
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
