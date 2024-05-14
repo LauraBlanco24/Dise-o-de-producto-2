@@ -24,7 +24,12 @@ const userSchema = new mongoose.Schema({
     celular: Number,
     direcccion: String,
     ciudad: String,
-    edad: Number
+    edad: Number,
+    password: {
+        type: String,
+        required: true,
+        bcrypt: true
+    }
 })
 
 const pastilleroSchema = new mongoose.Schema({
@@ -102,10 +107,10 @@ const historialMedicoSchema = new mongoose.Schema({
 const contactoEmergenciaSchema = new mongoose.Schema({
     _id: String,
     idUsuario: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    nombre: String, 
+    nombre: String,
     apellidos: String,
     numero: Number,
-    parentesco: String 
+    parentesco: String
 })
 
 const sincronizacionSchema = new mongoose.Schema({
@@ -182,6 +187,9 @@ const ciudadSchema = new mongoose.Schema({
     codigo: String
 })
 
+
+userSchema.plugin(require("mongoose-bcrypt"))
+
 const userModel = mongoose.model('User', userSchema)
 const pastilleroModel = mongoose.model('Pastillero', pastilleroSchema)
 const pastillaModel = mongoose.model('Pastilla', pastillaSchema)
@@ -217,23 +225,42 @@ app.get('/temp', (req, res) => {
 app.post('/register', async (req, res) => {
     console.log(req.body)
     let registro = req.body
+    let response = {}
     try {
         const newUser = new userModel(registro)
         await newUser.save()
-        let response = {
-            message: 'El registro se guardo correctamente'
+        response = {
+            message: 'Usuario creadon con exito'
         }
-        res.send(response);
     } catch (err) {
-        let response = {
-            message: 'El registro no se guardo correctamente',
+        response = {
+            message: 'No se pudo guardar el usuario',
             error: err
         }
-        res.send(response);
+        
     }
-
+    res.send(response);
 });
 
+app.post('/pastillero', async (req, res) => {
+    console.log(req.body)
+    let registro = req.body
+    let response = {}
+    try {
+        const newUser = new pastilleroModel(registro)
+        await newUser.save()
+        response = {
+            message: 'Se anexo correactamente el pastillero'
+        }
+    } catch (err) {
+        response = {
+            message: 'No se pudo anexar el pastillero',
+            error: err
+        }
+        
+    }
+    res.send(response);
+});
 
 app.listen(port, () => {
     console.log('ejemplo')
