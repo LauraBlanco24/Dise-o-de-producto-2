@@ -197,43 +197,24 @@ userSchema.plugin(require("mongoose-bcrypt"));
 const userModel = mongoose.model("User", userSchema);
 const pastilleroModel = mongoose.model("Pastillero", pastilleroSchema);
 const pastillaModel = mongoose.model("Pastilla", pastillaSchema);
-const horaioMedicacionModel = mongoose.model(
-  "HorarioMedicacion",
-  horarioMedicacionSchema
-);
+const horaioMedicacionModel = mongoose.model("HorarioMedicacion",horarioMedicacionSchema);
 const recordatorioModel = mongoose.model("Recordatorio", recordatoriosSchema);
 const registroTomaModel = mongoose.model("RegistroToma", registroTomaSchema);
-const pnotificacionesModel = mongoose.model(
-  "Notificaciones",
-  notificacionesSchema
-);
+const pnotificacionesModel = mongoose.model("Notificaciones",notificacionesSchema);
 const inventarioModel = mongoose.model("inventario", inventarioSchema);
 const datosSaludModel = mongoose.model("DatosSalud", datosSaludSchema);
-const HistorialMedicoModel = mongoose.model(
-  "HistorialMedico",
-  historialMedicoSchema
-);
-const contactoEmergenciaModel = mongoose.model(
-  "ContactoEmergencia",
-  contactoEmergenciaSchema
-);
-const sincronizacionModel = mongoose.model(
-  "Sincronizacion",
-  sincronizacionSchema
-);
+const HistorialMedicoModel = mongoose.model("HistorialMedico",historialMedicoSchema);
+const contactoEmergenciaModel = mongoose.model("ContactoEmergencia",contactoEmergenciaSchema);
+const sincronizacionModel = mongoose.model("Sincronizacion",sincronizacionSchema);
 const estadisticasModel = mongoose.model("Estadisticas", estadisticasSchema);
 const dosificacionModel = mongoose.model("Dosificacion", dosificacionSchema);
 const MedicoModel = mongoose.model("Medico", MedicoSchema);
 const farmaciaModel = mongoose.model("Farmacias", farmaciaSchema);
 const ubicacionModel = mongoose.model("Ubicacion", ubicacionSchema);
 const preferenciasModel = mongoose.model("Preferencia", preferenciasSchema);
-const actulizacionesModel = mongoose.model(
-  "Actulizaciones",
-  actulizacionesSchema
-);
+const actulizacionesModel = mongoose.model("Actulizaciones",actulizacionesSchema);
 const paisModel = mongoose.model("Pais", paisSchema);
-const ciudadSModel = mongoose.model("Ciudad", ciudadSchema);
-
+const ciudadModel = mongoose.model("Ciudad", ciudadSchema);
 const rutasProtegidas = express.Router();
 
 rutasProtegidas.use((req, res, next) => {
