@@ -564,28 +564,28 @@ app.post("/login", async (req, res) => {
           if (!result) {
             response = {
               message: "Usuario o contrasena incorrectos",
-              type: "E"
+              type: "Error"
             }
             res.send(response)
           } else {
             response = {
               message: "Acceso correcto",
-              type: "E"
+              type: "Error"
             }
             res.send(response)
-          }         // result == true
+          }         
         });
       } else {
         response = {
           message: "Correo o contrasena incorrectos",
-          type: "S"
+          type: "Success"
         }
         res.send(response)
       }
     } catch (err) {
       response = {
         message: err,
-        type: "E"
+        type: "Error"
       }
     }
   }
