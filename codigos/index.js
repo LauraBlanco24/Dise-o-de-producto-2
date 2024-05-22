@@ -3,6 +3,7 @@ var app = express();
 var coenctado = false;
 const port = 3000;
 const mongoose = require("mongoose");
+const bcrypt = require('bcrypt');
 
 app.use(express.json());
 
@@ -32,7 +33,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    bcrypt: true,
   },
 });
 
@@ -192,27 +192,25 @@ const ciudadSchema = new mongoose.Schema({
   codigo: String,
 });
 
-userSchema.plugin(require("mongoose-bcrypt"));
-
 const userModel = mongoose.model("User", userSchema);
 const pastilleroModel = mongoose.model("Pastillero", pastilleroSchema);
 const pastillaModel = mongoose.model("Pastilla", pastillaSchema);
-const horaioMedicacionModel = mongoose.model("HorarioMedicacion",horarioMedicacionSchema);
+const horaioMedicacionModel = mongoose.model("HorarioMedicacion", horarioMedicacionSchema);
 const recordatorioModel = mongoose.model("Recordatorio", recordatoriosSchema);
 const registroTomaModel = mongoose.model("RegistroToma", registroTomaSchema);
-const notificacionesModel = mongoose.model("Notificaciones",notificacionesSchema);
+const notificacionesModel = mongoose.model("Notificaciones", notificacionesSchema);
 const inventarioModel = mongoose.model("inventario", inventarioSchema);
 const datosSaludModel = mongoose.model("DatosSalud", datosSaludSchema);
-const HistorialMedicoModel = mongoose.model("HistorialMedico",historialMedicoSchema);
-const contactoEmergenciaModel = mongoose.model("ContactoEmergencia",contactoEmergenciaSchema);
-const sincronizacionModel = mongoose.model("Sincronizacion",sincronizacionSchema);
+const HistorialMedicoModel = mongoose.model("HistorialMedico", historialMedicoSchema);
+const contactoEmergenciaModel = mongoose.model("ContactoEmergencia", contactoEmergenciaSchema);
+const sincronizacionModel = mongoose.model("Sincronizacion", sincronizacionSchema);
 const estadisticasModel = mongoose.model("Estadisticas", estadisticasSchema);
 const dosificacionModel = mongoose.model("Dosificacion", dosificacionSchema);
 const MedicoModel = mongoose.model("Medico", MedicoSchema);
 const farmaciaModel = mongoose.model("Farmacias", farmaciaSchema);
 const ubicacionModel = mongoose.model("Ubicacion", ubicacionSchema);
 const preferenciasModel = mongoose.model("Preferencia", preferenciasSchema);
-const actulizacionesModel = mongoose.model("Actulizaciones",actulizacionesSchema);
+const actulizacionesModel = mongoose.model("Actulizaciones", actulizacionesSchema);
 const paisModel = mongoose.model("Pais", paisSchema);
 const ciudadModel = mongoose.model("Ciudad", ciudadSchema);
 const rutasProtegidas = express.Router();
@@ -238,14 +236,24 @@ app.post("/register", async (req, res) => {
   console.log(req.body);
   let registro = req.body;
   let response = {};
-  try {
-    const newUser = new userModel(registro);
-    await newUser.save();
-    response = { message: "Usuario creado con éxito" };
-  } catch (err) {
-    response = { message: "No se pudo guardar el usuario", error: err };
+  if (registro) {
+    bcrypt.hash(registro.password, 10, async function (err, hash) {
+      if (err) {
+        res.send('Error ' + err.message)
+        return;
+      }
+      registro.password = hash
+      try {
+        const newUser = new userModel(registro);
+        await newUser.save();
+        response = { message: "Usuario creado con éxito" };
+      } catch (err) {
+        response = { message: "No se pudo guardar el usuario", error: err };
+      }
+      res.send(response);
+    });
   }
-  res.send(response);
+
 });
 
 app.post("/pastillero", async (req, res) => {
@@ -535,6 +543,52 @@ app.post("/Ciudad", async (req, res) => {
     response = { message: "No se pudo guardar la ciudad", error: err };
   }
   res.send(response);
+});
+
+app.post("/login", async (req, res) => {
+
+  let requestLogin = req.body
+  console.log(requestLogin)
+  let response = {}
+  if (requestLogin) {
+    //console.log(requestPassword)
+    try {
+      const data = await userModel.findOne({
+        correo: requestLogin.correo,
+      });
+      console.log(data)
+
+      if (data != null) {
+        bcrypt.compare(requestLogin.password, data.password, function (err, result) {
+          console.log(result)
+          if (!result) {
+            response = {
+              message: "Usuario o contrasena incorrectos",
+              type: "E"
+            }
+            res.send(response)
+          } else {
+            response = {
+              message: "Acceso correcto",
+              type: "E"
+            }
+            res.send(response)
+          }         // result == true
+        });
+      } else {
+        response = {
+          message: "Correo o contrasena incorrectos",
+          type: "S"
+        }
+        res.send(response)
+      }
+    } catch (err) {
+      response = {
+        message: err,
+        type: "E"
+      }
+    }
+  }
 });
 
 app.listen(port, () => {
