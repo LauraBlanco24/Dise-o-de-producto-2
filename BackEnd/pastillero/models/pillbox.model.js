@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { pillSchema, pillModel } from "./pill.model.js";
 
 const pillBoxSchema = new mongoose.Schema({
     _id: {
@@ -28,7 +29,7 @@ const pillBoxSchema = new mongoose.Schema({
         type: Date,
         require: true
     },
-    pilss: [String], // el objeto tiene los id de las pastillas
+    pilss: [pillSchema], // el objeto tiene los id de las pastillas
   });
 
   export default mongoose.model("PillBox", pillBoxSchema);

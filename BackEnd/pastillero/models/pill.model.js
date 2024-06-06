@@ -25,9 +25,13 @@ const pillSchema = new mongoose.Schema({
         required: true
     },
     laboratory: {
-        type: String,
-        required: true
+        type: mongoose.Schema.Types.String,
+        ref: 'laboratiry',
+        require: true
     },
+    dosage:[String]
   });
 
-  export default mongoose.model("Pill", pillSchema);
+const pillModel = mongoose.model("Pill", pillSchema)
+
+  export { pillSchema, pillModel } ;
