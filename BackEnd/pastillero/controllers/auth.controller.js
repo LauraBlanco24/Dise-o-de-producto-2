@@ -62,17 +62,21 @@ export const logout = (req, res) => {
 }
 
 export const profile = async (req, res) => {
-  /*const dataUser = await user.findById(req.user.id)
+  console.log(req.user.id)
+  const dataUser = await user.findById(req.user.id)
   if (!dataUser) return res.status(404).json({ message: "Usuario no encontrado", type: "Error" });
 
 
   //return res.send(dataUser)
   return res.json({
     id: dataUser._id,
-    name: dataUser.name,
+    firstName:dataUser.firstName,
     lastName: dataUser.lastName,
-    docummetID: dataUser.docummetID,
+    email:dataUser.email,
+    docummetID: dataUser.documentID,
     phoneNumber: dataUser.phoneNumber,
+    address: dataUser.address,
+    city: dataUser.city,
     age: dataUser.age,
-  })*/
+  })
 }
