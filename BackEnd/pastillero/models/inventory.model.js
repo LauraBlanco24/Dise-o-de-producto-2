@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const registerTakePillSchema = new mongoose.Schema({
+const inventorySchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
@@ -12,19 +12,19 @@ const registerTakePillSchema = new mongoose.Schema({
         ref: 'User',
         require: true
      },
-    pillBoxID: { 
+     pillBoxID: { 
         type: mongoose.Schema.Types.String,
         ref: 'PillBox',
         require: true
      },
-    fhRegistro: {
+    pilssAmount: {
         type: Number,
-        default: 0        
-    },
-    status: {
-        type: Boolean,
         default: true        
+    },
+    repositionDate: {
+        type: Date,
+        default: new Date(0)        
     },
   });
 
-  export default mongoose.model("RegisterTakePill", registerTakePillSchema);
+  export default mongoose.model("Inventory", inventorySchema);

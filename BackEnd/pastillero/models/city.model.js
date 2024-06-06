@@ -1,25 +1,25 @@
 import mongoose from "mongoose";
 
-const reminderSchema = new mongoose.Schema({
+const citySchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
         trim: true,
         unique: true
     },
-    userID: { 
+    countryID: { 
         type: mongoose.Schema.Types.String,
-        ref: 'User',
+        ref: 'Country',
         require: true
      },
-    fHourTake: {
-        type: Number,
-        default: 0        
-    },
-    message: {
+    nameCity: {
         type: String,
-        required: true
+        require: true        
+    },
+    cityCode: {
+        type: String,
+        require: true        
     },
   });
-
-  export default mongoose.model("Reminder", reminderSchema);
+  
+  export default mongoose.model("City", citySchema);

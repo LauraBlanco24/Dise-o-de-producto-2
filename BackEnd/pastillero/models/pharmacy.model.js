@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const pillSchema = new mongoose.Schema({
+const pharmacySchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
@@ -12,22 +12,22 @@ const pillSchema = new mongoose.Schema({
         ref: 'PillBox',
         require: true
      },
-    pillType: {
+    name: {
         type: String,
-        required: true
+        require: true        
     },
-    weigth: {
-        type: String,
-        required: true
+    number: {
+        type: Number,
+        require: true        
     },
-    dimensions: {
+    serviceDays: {
         type: String,
-        required: true
+        require: true        
     },
-    laboratory: {
-        type: String,
-        required: true
+    delivery: {
+        type: Boolean,
+        require: true        
     },
   });
 
-  export default mongoose.model("Pill", pillSchema);
+  export default mongoose.model("Pharmacy", pharmacySchema);

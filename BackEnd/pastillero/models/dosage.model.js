@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const registerTakePillSchema = new mongoose.Schema({
+const dosageSchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
@@ -12,19 +12,15 @@ const registerTakePillSchema = new mongoose.Schema({
         ref: 'User',
         require: true
      },
-    pillBoxID: { 
+     pillBoxID: { 
         type: mongoose.Schema.Types.String,
         ref: 'PillBox',
         require: true
      },
-    fhRegistro: {
-        type: Number,
-        default: 0        
-    },
-    status: {
-        type: Boolean,
-        default: true        
+     dosage: {
+        type: Object,
+        require: true        
     },
   });
 
-  export default mongoose.model("RegisterTakePill", registerTakePillSchema);
+  export default mongoose.model("Dosage", dosageSchema);

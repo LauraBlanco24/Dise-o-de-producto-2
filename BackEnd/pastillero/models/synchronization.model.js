@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const medicationScheduleSchema = new mongoose.Schema({
+const synchronizationSchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
@@ -12,11 +12,10 @@ const medicationScheduleSchema = new mongoose.Schema({
         ref: 'PillBox',
         require: true
      },
-    fhoraToma: {
-        type: Number,
-        default: 0        
+    lastsynchronization: {
+        type: Date,
+        default: new Date(0)        
     },
-    frecuenciaDiaria: Object, //el objeto esta por hora y dia
   });
 
-  export default mongoose.model("MedicationSchedule", medicationScheduleSchema);
+  export default mongoose.model("Synchronization", synchronizationSchema);

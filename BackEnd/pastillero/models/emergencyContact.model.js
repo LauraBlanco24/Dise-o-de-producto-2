@@ -1,25 +1,21 @@
 import mongoose from "mongoose";
 
-const reminderSchema = new mongoose.Schema({
+const emergencyContactchema = new mongoose.Schema({
     _id: {
         type: String,
         required: true,
         trim: true,
         unique: true
     },
-    userID: { 
+    userID: {
         type: mongoose.Schema.Types.String,
         ref: 'User',
         require: true
-     },
-    fHourTake: {
-        type: Number,
-        default: 0        
     },
-    message: {
+    relationship: {
         type: String,
-        required: true
+        require: true
     },
-  });
+});
 
-  export default mongoose.model("Reminder", reminderSchema);
+export default mongoose.model("EmergencyContact", emergencyContactchema);
