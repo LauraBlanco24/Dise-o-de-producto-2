@@ -38,6 +38,7 @@ export const getPillBox = async (req, res) => {
         message: "Informacion encontrada con exito",
         type: "Success",
         data: {
+            "id":pillBoxData._id,
             "name": pillBoxData.name,
             "amountPills": pillBoxData.amountPills,
             "battery": pillBoxData.battery,
@@ -54,6 +55,7 @@ export const getPillBoxes = async (req, res) => {
     
     for (let index = 0; index < pillBoxes.length; index++) {
         pillBoxesData.push({
+            "id":pillBoxes[index]._id,
             "name": pillBoxes[index].name,
             "amountPills": pillBoxes[index].amountPills,
             "battery": pillBoxes[index].battery,
