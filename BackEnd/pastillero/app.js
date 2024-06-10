@@ -9,7 +9,7 @@ import pillBoxRoutes from './routers/pillBox.routes.js'
 const app = express()
 
 const corsOptions = {
-    origin: '*',
+    origin: 'http://localhost:8080',
     credentials: true,
 
 };
