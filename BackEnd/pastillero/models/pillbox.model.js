@@ -29,7 +29,7 @@ const pillBoxSchema = new mongoose.Schema({
         type: Date,
         require: true
     },
-    pilss: [pillSchema], // el objeto tiene los id de las pastillas
+    pills: [pillSchema], // el objeto tiene los id de las pastillas
   });
 
   export default mongoose.model("PillBox", pillBoxSchema);
