@@ -29,7 +29,9 @@ const pillBoxSchema = new mongoose.Schema({
         type: Date,
         require: true
     },
-    pills: [pillSchema], // el objeto tiene los id de las pastillas
+    pills:{
+        type: [String],
+      },
   });
 
   export default mongoose.model("PillBox", pillBoxSchema);
