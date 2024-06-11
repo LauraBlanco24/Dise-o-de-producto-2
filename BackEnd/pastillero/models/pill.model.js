@@ -7,11 +7,15 @@ const pillSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
-    pillBoxID: { 
+    name: {
+        type: mongoose.Schema.Types.String,
+        require: true
+    },
+    pillBoxID: {
         type: mongoose.Schema.Types.String,
         ref: 'PillBox',
         require: true
-     },
+    },
     pillType: {
         type: String,
         required: true
@@ -29,9 +33,9 @@ const pillSchema = new mongoose.Schema({
         ref: 'laboratiry',
         require: true
     },
-    dosage:[String]
-  });
+    dosage: [String]
+});
 
 const pillModel = mongoose.model("Pill", pillSchema)
 
-  export { pillSchema, pillModel } ;
+export { pillSchema, pillModel };

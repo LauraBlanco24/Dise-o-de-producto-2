@@ -71,3 +71,13 @@ export const getPillBoxes = async (req, res) => {
         data: pillBoxesData
     })
 }
+
+export const deletePillBox = async (req, res) =>{
+    const dataPillBox = await pillBox.findByIdAndDelete(req.params.id)
+    if(!dataPillBox) return res.status(404).json({ message: "No se puedo elminar el dispositivo porque no se encontro", type: "Error"})
+    res.json({ message: "Pastillero eliminado exitosamente", type: "Success"})
+}
+
+export const updatePillBox = async (req, res) =>{
+    
+}
