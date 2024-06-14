@@ -2,11 +2,13 @@ import pillBox from '../models/pillbox.model.js'
 
 export const addPillBox = async (req, res) => {
     const dataPillBox = req.body
+
     if (dataPillBox) {
         try {
+            console.log(req.user.id)
             dataPillBox._id = req.user.id + '_' + dataPillBox.name
             dataPillBox.userID = req.user.id
-
+            console.log(dataPillBox)
             const newPillBox = new pillBox(dataPillBox)
             await newPillBox.save()
 
